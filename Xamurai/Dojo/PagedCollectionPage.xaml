@@ -5,30 +5,40 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Xamurai">
     <ContentPage.Content>
-        
-            <ScrollView Orientation="Horizontal">
-                <FlexLayout
-					AlignContent="Start"
-					AlignItems="Center"
-					BindableLayout.ItemsSource="{Binding Cars}"
-					Direction="Column"
-					JustifyContent="Start"
-					Wrap="Wrap">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <local:CarView>
-                                <local:CarView.WidthRequest>
-                                    <OnIdiom
-										x:TypeArguments="x:Double"
-										Phone="200"
-										Tablet="400" />
-                                </local:CarView.WidthRequest>
-
-                            </local:CarView>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-            </ScrollView>
-    
+        <Grid>
+            <CarouselView x:Name="CV"
+			              Margin="10"
+                          ItemsSource="{Binding Cars}"
+			              HorizontalOptions="Center"
+			              VerticalOptions="CenterAndExpand">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+					                   SnapPointsAlignment="Center"
+					                   SnapPointsType="Mandatory" />
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <FlexLayout AlignContent="Start"
+							        AlignItems="Center"
+							        Direction="Column"
+							        JustifyContent="Start"
+                                    BindableLayout.ItemsSource="{Binding .}"
+							        Wrap="Wrap">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <local:CarView>
+                                        <local:CarView.WidthRequest>
+                                            <OnIdiom x:TypeArguments="x:Double"
+										                    Phone="200"
+										                    Tablet="400" />
+                                        </local:CarView.WidthRequest>
+                                    </local:CarView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
